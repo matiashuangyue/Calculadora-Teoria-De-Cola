@@ -1,0 +1,38 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #e0f7fa;
+}
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.model-card {
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.model-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.model-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
