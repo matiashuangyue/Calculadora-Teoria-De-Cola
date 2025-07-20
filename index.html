@@ -38,37 +38,37 @@
     <h2>Elegí un modelo</h2>
     <div class="tarjetas-modelos">
       <!-- Tarjetas interactivas -->
-      <div class="tarjeta" onclick="seleccionarModelo('mm1')">
+      <div class="tarjeta modelo-card" data-modelo="mm1">
         <img src="assets/mm1.png" alt="M/M/1"/>
         <h3>M/M/1</h3>
         <p class="descripcion">Un solo servidor, llegadas y servicios exponenciales</p>
       </div>
 
-      <div class="tarjeta" onclick="seleccionarModelo('mm2')">
+      <div class="tarjeta modelo-card" data-modelo="mm2">
         <img src="assets/mm2.png" alt="M/M/2"/>
         <h3>M/M/2</h3>
         <p class="descripcion">Dos servidores, llegadas y servicios exponenciales</p>
       </div>
 
-      <div class="tarjeta" onclick="seleccionarModelo('mm1n')">
+      <div class="tarjeta modelo-card" data-modelo="mm1n">
         <img src="assets/mm1n.png" alt="M/M/1/N"/>
         <h3>M/M/1/N</h3>
         <p class="descripcion">Capacidad limitada (máximo N clientes)</p>
       </div>
 
-      <div class="tarjeta" onclick="seleccionarModelo('prioridades')">
+      <div class="tarjeta modelo-card" data-modelo="prioridades">
         <img src="assets/prioridades.png" alt="Prioridades"/>
         <h3>Prioridades</h3>
         <p class="descripcion">Clientes con diferentes niveles de prioridad</p>
       </div>
 
-      <div class="tarjeta" onclick="seleccionarModelo('md1')">
+      <div class="tarjeta modelo-card" data-modelo="md1">
         <img src="assets/md1.png" alt="M/D/1"/>
         <h3>M/D/1</h3>
         <p class="descripcion">Servicio con tiempo fijo</p>
       </div>
 
-      <div class="tarjeta" onclick="seleccionarModelo('mg1')">
+      <div class="tarjeta modelo-card" data-modelo="mg1">
         <img src="assets/mg1.png" alt="M/G/1"/>
         <h3>M/G/1</h3>
         <p class="descripcion">Tiempo de servicio general (media y varianza)</p>
@@ -80,6 +80,18 @@
   <section id="formulario-calculo" class="calculo">
     <!-- Este contenedor se rellena dinámicamente desde JS -->
   </section>
+
+    <!-- 🔹 Formularios ocultos para cada modelo -->
+  <div style="display: none;">
+  <div id="form-mm1" class="formulario-modelo"></div>
+  <div id="form-mm2" class="formulario-modelo"></div>
+  <div id="form-mm1n" class="formulario-modelo"></div>
+  <div id="form-prioridades" class="formulario-modelo"></div>
+  <div id="form-md1" class="formulario-modelo"></div>
+  <div id="form-mg1" class="formulario-modelo"></div>
+</div>
+
+
 
   <!-- 🔹 Sección de resultados -->
   <section id="resultados" class="resultados">
