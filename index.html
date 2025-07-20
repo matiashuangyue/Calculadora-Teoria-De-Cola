@@ -83,8 +83,10 @@
 
     <!-- 🔹 Formularios ocultos para cada modelo -->
   <div style="display: none;">
+    
     <input type="number" id="lambda" name="lambda" /> <!-- sin "required" -->
-
+    <input type="number" id="mu" name="mu" />
+       <!--formulario mm1--> 
   <div id="form-mm1" class="formulario-modelo">
     <h3>Modelo M/M/1</h3>
         <form id="mm1-form">
@@ -98,7 +100,7 @@
 
             <label for="tipoCalculo">Tipo de cálculo:</label>
             <select id="tipoCalculo" name="tipoCalculo">
-            <option value="">Seleccione una opción</option>
+            <option value="">Seleccione una opción</option> 
             <option value="exactamente">Exactamente</option>
             <option value="almenos">Al menos</option>
             <option value="alosumo">A lo sumo</option>
@@ -112,19 +114,45 @@
             <option value="cola">En cola</option>
             </select>
             <span class="error-message" id="error-contexto"></span>
-
-
             <div class="botones">
                 <button type="submit">Calcular</button>
                 <button type="reset">Limpiar</button>
             </div>
         </form>
-
-
   </div>
 
 
-  <div id="form-mm2" class="formulario-modelo"></div>
+  <div id="form-mm2" class="formulario-modelo">
+
+     <h3>Modelo M/M/2</h3>
+        <form id="mm2-form">
+            <label for="lambda">Tasa de llegada (λ):</label>
+            <input type="number" step="any" id="lambda" name="lambda" />
+            <span class="error-message" id="error-lambda"></span>
+
+            <label for="mu1">Tasa de servicio 1 (μ1):</label>
+            <input type="number" step="any" id="mu" name="mu" />
+            <span class="error-message" id="error-mu"></span>
+
+            <label for="mu2">Tasa de servicio 2 (μ2):</label>
+            <input type="number" step="any" id="mu2" name="mu2" />
+            <span class="error-message" id="error-mu2"></span>
+
+            <label for="modoseleccion">Modo de Seleccion:</label>
+            <select id="modoseleccion" name="modoseleccion">
+            <option value="">Seleccione una opción</option>
+            <option value="conseleccion">Con Seleccion</option>
+            <option value="sinseleccion">Sin Seleccion</option>
+            </select>
+            <span class="error-message" id="error-modoseleccion"></span>
+
+            <div class="botones">
+                <button type="submitMM2">Calcular</button>
+                <button type="resetMM2">Limpiar</button>
+            </div>
+        </form>
+
+  </div>
   <div id="form-mm1n" class="formulario-modelo"></div>
   <div id="form-prioridades" class="formulario-modelo"></div>
   <div id="form-md1" class="formulario-modelo"></div>
@@ -150,5 +178,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/mm1.js"></script>
 </body>
 </html>
