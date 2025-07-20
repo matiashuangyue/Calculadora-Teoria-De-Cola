@@ -86,17 +86,33 @@
 
   <div id="form-mm1" class="formulario-modelo">
     <h3>Modelo M/M/1</h3>
+        <form id="mm1-form">
+        <label for="lambda">Tasa de llegada (λ):</label>
+        <input type="number" step="any" id="lambda" name="lambda" required />
 
-    <form id="mm1-form">
-    <label for="lambda">Tasa de llegada (λ):</label>
-    <input type="number" step="any" id="lambda" name="lambda" required />
+        <label for="mu">Tasa de servicio (μ):</label>
+        <input type="number" step="any" id="mu" name="mu" required />
 
-    <label for="mu">Tasa de servicio (μ):</label>
-    <input type="number" step="any" id="mu" name="mu" required />
+        <label for="tipoCalculo">Tipo de cálculo:</label>
+        <select id="tipoCalculo" name="tipoCalculo" required>
+            <option value="exactamente">Exactamente</option>
+            <option value="almenos">Al menos</option>
+            <option value="alosumo">A lo sumo</option>
+        </select>
 
-    <button type="submit">Calcular</button>
-    </form>
-    
+        <label for="contexto">Contexto:</label>
+        <select id="contexto" name="contexto" required>
+            <option value="sistema">En sistema</option>
+            <option value="cola">En cola</option>
+        </select>
+
+        <div class="botones">
+            <button type="submit">Calcular</button>
+            <button type="reset">Limpiar</button>
+        </div>
+        </form>
+
+
   </div>
 
 

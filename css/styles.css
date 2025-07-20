@@ -1,10 +1,15 @@
-/* Reset básico */
+/* =======================
+   Reset básico
+   ======================= */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* =======================
+   Estilos generales del body
+   ======================= */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -15,7 +20,9 @@ body {
   flex-direction: column;
 }
 
-/* Header / Bienvenida */
+/* =======================
+   Header / Bienvenida
+   ======================= */
 .hero {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   color: white;
@@ -48,7 +55,9 @@ body {
   background-color: #d1eaff;
 }
 
-/* Sección educativa */
+/* =======================
+   Sección educativa
+   ======================= */
 .educativa {
   max-width: 900px;
   margin: 3rem auto;
@@ -91,7 +100,9 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Sección modelos */
+/* =======================
+   Sección modelos (tarjetas)
+   ======================= */
 .modelos {
   max-width: 1100px;
   margin: 3rem auto;
@@ -106,9 +117,12 @@ body {
 
 .tarjetas-modelos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
   gap: 1.8rem;
+  max-width: 700px; /* opcional para controlar ancho total */
+  margin: 0 auto;   /* centrar el grid */
 }
+
 
 .tarjeta {
   background-color: white;
@@ -144,24 +158,83 @@ body {
   color: #666;
 }
 
-/* Sección cálculo y resultados */
+/* =======================
+   Sección cálculo y resultados
+   ======================= */
 .calculo, .resultados {
   max-width: 900px;
   margin: 2rem auto 4rem;
   padding: 0 1rem;
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1rem 0;
-  background-color: #f1f1f1;
-  font-size: 0.9rem;
-  color: #555;
-  border-top: 1px solid #ddd;
+/* =======================
+   Formulario estilos generales
+   ======================= */
+form {
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Botones generales */
+form label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+form input,
+form select {
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* =======================
+   Botones del formulario
+   ======================= */
+.botones {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.botones button {
+  padding: 14px 20px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  min-width: 120px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.botones button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.botones button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.botones button[type="reset"] {
+  background-color: #ccc;
+  color: #333;
+}
+
+.botones button[type="reset"]:hover {
+  background-color: #999;
+}
+
+/* =======================
+   Botones generales (fuera de formulario)
+   ======================= */
 button {
   background-color: #4facfe;
   border: none;
@@ -177,13 +250,33 @@ button:hover {
   background-color: #008fd5;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .tarjetas-modelos {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
+/* =======================
+   Footer
+   ======================= */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #f1f1f1;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+}
 
-  .hero h1 {
-    font-size: 2rem;
+/* =======================
+   Responsive
+   ======================= */
+
+
+@media (max-width: 700px) {
+  .tarjetas-modelos {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  .tarjetas-modelos {
+    grid-template-columns: 1fr;
+    max-width: 300px;
   }
 }
