@@ -1,60 +1,95 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calculadora de Teoremas de Colas</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-  <header>
+
+  <!-- 🔹 Bienvenida -->
+  <header class="hero">
     <h1>Calculadora de Teoremas de Colas</h1>
-    <p>Proyecto para resolver modelos clásicos como M/M/1, M/M/1/N, etc.</p>
-    <button onclick="document.getElementById('calculadoras').scrollIntoView({ behavior: 'smooth' });">
-      Ver Calculadoras
+    <p>Interactuá, aprendé y resolvé modelos clásicos de colas</p>
+    <button onclick="document.getElementById('calculadoras').scrollIntoView({behavior: 'smooth'})">
+      ⬇ Ver Calculadoras
     </button>
   </header>
 
-  <section id="introduccion">
-    <h2>¿Qué es la teoría de colas?</h2>
-    <p>La teoría de colas estudia líneas de espera, tiempos de atención y sistemas de servicio...</p>
+  <!-- 🔹 Sección educativa -->
+  <section class="educativa">
+    <h2>¿Qué es la Teoría de Colas?</h2>
+    <p>
+      La teoría de colas estudia sistemas donde se generan esperas o colas debido a la llegada de clientes y el servicio limitado. 
+      Se aplica en atención al cliente, informática, logística, salud y más.
+    </p>
+    <img src="assets/teoria-colas.png" alt="Ilustración teoría de colas" />
+    <ul>
+      <li>📞 Call centers</li>
+      <li>🏥 Hospitales</li>
+      <li>🛒 Cajas de supermercado</li>
+      <li>📶 Redes de computadoras</li>
+    </ul>
   </section>
 
-  <section id="calculadoras" style="padding: 2rem;">
-  <div class="model-grid">
-    <div class="model-card" onclick="window.location.href='mm1.html'">
-      <img src="assets/modelos/mm1.png" alt="Modelo M/M/1">
-      <h3>M/M/1</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='mm2.html'">
-      <img src="assets/modelos/mm2.png" alt="Modelo M/M/2">
-      <h3>M/M/2</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='mmn.html'">
-      <img src="assets/modelos/mmn.png" alt="Modelo M/M/n">
-      <h3>M/M/n</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='mm1n.html'">
-      <img src="assets/modelos/mm1n.png" alt="Modelo M/M/1/N">
-      <h3>M/M/1/N</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='prioridades.html'">
-      <img src="assets/modelos/prioridades.png" alt="Modelo con prioridades">
-      <h3>Con Prioridades</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='md1.html'">
-      <img src="assets/modelos/md1.png" alt="Modelo M/D/1">
-      <h3>M/D/1</h3>
-    </div>
-    <div class="model-card" onclick="window.location.href='mg1.html'">
-      <img src="assets/modelos/mg1.png" alt="Modelo M/G/1">
-      <h3>M/G/1</h3>
-    </div>
-  </div>
-</section>
+  <!-- 🔹 Sección de modelos -->
+  <section id="calculadoras" class="modelos">
+    <h2>Elegí un modelo</h2>
+    <div class="tarjetas-modelos">
+      <!-- Tarjetas interactivas -->
+      <div class="tarjeta" onclick="seleccionarModelo('mm1')">
+        <img src="assets/mm1.png" alt="M/M/1"/>
+        <h3>M/M/1</h3>
+        <p class="descripcion">Un solo servidor, llegadas y servicios exponenciales</p>
+      </div>
 
+      <div class="tarjeta" onclick="seleccionarModelo('mm2')">
+        <img src="assets/mm2.png" alt="M/M/2"/>
+        <h3>M/M/2</h3>
+        <p class="descripcion">Dos servidores, llegadas y servicios exponenciales</p>
+      </div>
 
+      <div class="tarjeta" onclick="seleccionarModelo('mm1n')">
+        <img src="assets/mm1n.png" alt="M/M/1/N"/>
+        <h3>M/M/1/N</h3>
+        <p class="descripcion">Capacidad limitada (máximo N clientes)</p>
+      </div>
+
+      <div class="tarjeta" onclick="seleccionarModelo('prioridades')">
+        <img src="assets/prioridades.png" alt="Prioridades"/>
+        <h3>Prioridades</h3>
+        <p class="descripcion">Clientes con diferentes niveles de prioridad</p>
+      </div>
+
+      <div class="tarjeta" onclick="seleccionarModelo('md1')">
+        <img src="assets/md1.png" alt="M/D/1"/>
+        <h3>M/D/1</h3>
+        <p class="descripcion">Servicio con tiempo fijo</p>
+      </div>
+
+      <div class="tarjeta" onclick="seleccionarModelo('mg1')">
+        <img src="assets/mg1.png" alt="M/G/1"/>
+        <h3>M/G/1</h3>
+        <p class="descripcion">Tiempo de servicio general (media y varianza)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔹 Sección de cálculo -->
+  <section id="formulario-calculo" class="calculo">
+    <!-- Este contenedor se rellena dinámicamente desde JS -->
+  </section>
+
+  <!-- 🔹 Sección de resultados -->
+  <section id="resultados" class="resultados">
+    <!-- Aquí van las tarjetas con resultados -->
+  </section>
+
+  <!-- 🔹 Footer -->
   <footer>
-    <p>Desarrollado por Yue Huang – <a href="https://github.com/matiashuangyue" target="_blank">GitHub</a></p>
+    <p>Desarrollado por Matías Huang Yue</p>
+    <a href="https://github.com/matiashuangyue" target="_blank">🔗 GitHub</a>
   </footer>
 
   <script src="js/main.js"></script>

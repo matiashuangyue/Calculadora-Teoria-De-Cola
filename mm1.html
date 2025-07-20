@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora M/M/1</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Calculadora de Teoría de Colas - M/M/1</h1>
+    <nav>
+      <a href="index.html">← Volver al inicio</a>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <section class="card">
+      <h2>Parámetros de entrada</h2>
+      <form id="form-mm1" class="formulario">
+        <div class="campo">
+          <label for="lambda">λ (Tasa de llegada):</label>
+          <input type="number" id="lambda" step="any" required>
+        </div>
+        <div class="campo">
+          <label for="mu">μ (Tasa de servicio):</label>
+          <input type="number" id="mu" step="any" required>
+        </div>
+        <button type="submit">Calcular</button>
+      </form>
+    </section>
+
+    <section id="resultados-mm1" class="resultados">
+      <!-- Las tarjetas con los resultados aparecerán aquí -->
+    </section>
+  </main>
+
+  <footer>
+    <p>Proyecto de Modelización Numérica – Yue Huang – 2025</p>
+  </footer>
+
+  <script src="js/mm1.js"></script>
+</body>
+</html>
