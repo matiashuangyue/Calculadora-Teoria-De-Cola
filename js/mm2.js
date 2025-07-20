@@ -42,21 +42,25 @@ function mostrarResultadosMM2(resultados) {
     seccionResultados.scrollIntoView({ behavior: "smooth" });
 }
 
-function checkMM2Errors(form) {
+
+function validarCamposMM2(form) {
+    // Limpiar errores anteriores
+    form.querySelectorAll(".error-message").forEach(span => span.textContent = "");
     const lambdaInput = form.querySelector("#lambda");
     const mu1Input = form.querySelector("#mu1");
     const mu2Input = form.querySelector("#mu2");
     const seleccionInput = form.querySelector("#modoseleccion");
-
+    
     const lambda = lambdaInput.value.trim();
     const mu1 = mu1Input.value.trim();
     const mu2 = mu2Input.value.trim();
     const seleccion = seleccionInput.value;
-    
     let valido = true;
-
     if (!lambda) {
         form.querySelector("#error-lambda").textContent = "Ingrese la tasa de llegada (λ).";
+        valido = false;
+    } else if (parseFloat(lambda) <= 0) {
+        form.querySelector("#error-lambda").textContent = "λ debe ser mayor que 0.";
         valido = false;
     }
     if (!mu1) {
@@ -77,37 +81,15 @@ function checkMM2Errors(form) {
         form.querySelector("#error-modoseleccion").textContent = "Seleccione un modo de selección.";
         valido = false;
     }
-    return valido;
+    return {
+        valido,
+        lambda: parseFloat(lambda),
+        mu1: parseFloat(mu1),
+        mu2: parseFloat(mu2),
+        seleccion
+    };
 }
 
-document.getElementById("formulario-calculo").addEventListener("submit", function (event) {
-    const form = event.target;
 
-    if (form.id === "form-activo") {
-        event.preventDefault();
 
-        // Limpiar errores anteriores
-        form.querySelectorAll(".error-message").forEach(span => span.textContent = "");
-
-        if (!checkMM2Errors(form)) {
-            return;
-        }
-
-        const lambdaInput = form.querySelector("#lambda");
-        const mu1Input = form.querySelector("#mu1");
-        const mu2Input = form.querySelector("#mu2");
-        const seleccionInput = form.querySelector("#modoseleccion");
-
-        const lambda = parseFloat(lambdaInput.value);
-        const mu1 = parseFloat(mu1Input.value);
-        const mu2 = parseFloat(mu2Input.value);
-        const seleccion = seleccionInput.value;
-
-        // Resultado temporal
-        const resultados = calcularMM2(lambda, mu1, mu2, seleccion);
-
-        mostrarResultadosMM2(resultados);
-    }
-}
-);
 

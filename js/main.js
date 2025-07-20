@@ -27,7 +27,11 @@ tarjetas.forEach(tarjeta => {
             const contenido = formularioOriginal.innerHTML;
             const wrapper = document.createElement("div");
             wrapper.innerHTML = contenido;
-            wrapper.querySelector("form").id = "form-activo"; // ID único temporal
+            const wrapperForm = wrapper.querySelector("form");
+            wrapperForm.id = "form-activo";
+            wrapperForm.classList.add(modelo); // modelo será: "mm1", "mm2", etc.
+            console.log("Clase asignada al formulario:", wrapperForm.classList);
+
 
             contenedorCalculo.appendChild(wrapper);
             contenedorCalculo.scrollIntoView({ behavior: "smooth" });
@@ -39,23 +43,33 @@ tarjetas.forEach(tarjeta => {
         // Delegar validación del formulario clonado en el contenedor
 const contenedorCalculo = document.getElementById("formulario-calculo");// Asegúrate de que este contenedor exista
 
+// Evento de submit en el formulario mm1
 contenedorCalculo.addEventListener("submit", function (event) {
     const form = event.target;
+    if (form.id !== "form-activo") return;
+    console.log("Formulario activo. Clases:", form.classList);
 
-    if (form.id === "form-activo") {
-        event.preventDefault();
+    event.preventDefault();
 
+    if (form.classList.contains("mm1")) {
         const { valido, lambda, mu, tipo, ctx } = validarCamposMM1(form);
-
         if (!valido) return;
-
         const resultados = calcularMM1(lambda, mu, tipo, ctx);
         mostrarResultadosMM1(resultados);
     }
+
+    if (form.classList.contains("mm2")) {
+        const { valido, lambda, mu1, mu2, seleccion } = validarCamposMM2(form);
+        if (!valido) return;
+        const resultados = calcularMM2(lambda, mu1, mu2, seleccion);
+        mostrarResultadosMM2(resultados);
+    }
+
+    // Agregás más modelos aquí en el futuro...
 });
 
 
-
+// Evento de reset en el formulario mm1
 contenedorCalculo.addEventListener("reset", function (event) {
     const form = event.target;
     if (form.id === "form-activo") {
@@ -63,6 +77,22 @@ contenedorCalculo.addEventListener("reset", function (event) {
         limpiarErrores(form);
          // Ocultar sección de resultados
         OcultarResultados();
+    }
+});
+
+// Evento de submit en el formulario mm2
+contenedorCalculo.addEventListener("submit", function (event) {
+    const form = event.target;
+
+    if (form.id === "form-activo" && form.classList.contains("mm2")) {
+        event.preventDefault();
+
+        const { valido, lambda, mu1, mu2, seleccion} = validarCamposMM2(form);
+
+        if (!valido) return;
+
+        const resultados = calcularMM2(lambda, mu1, mu2,);
+        mostrarResultadosMM2(resultados);
     }
 });
 });
