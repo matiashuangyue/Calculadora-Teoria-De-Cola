@@ -187,7 +187,7 @@ form {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1px;
 }
 
 form label {
@@ -203,6 +203,7 @@ form select {
   border-radius: 8px;
   width: 100%;
   box-sizing: border-box;
+  
 }
 
 /* =======================
@@ -291,3 +292,69 @@ footer {
     max-width: 300px;
   }
 }
+
+/* =======================
+   Resultados visuales
+   ======================= */
+.resultados-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
+    margin-top: 2rem;
+    gap: 1.8rem;
+    max-width: 700px; /* opcional para controlar ancho total */
+    margin: 0 auto;  
+}
+
+.resultado-card {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.resultado-card:hover {
+    transform: scale(1.03);
+}
+
+.resultado-card .simbolo {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.resultado-card .valor {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.resultado-card .descripcion {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+/* Tooltip con fórmula al hacer hover */
+.resultado-card .tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.resultado-card:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+

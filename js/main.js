@@ -86,8 +86,8 @@ contenedorCalculo.addEventListener("submit", function (event) {
         if (!valido) return;
 
         // Resultado temporal
-        const resultado = calcularMM1(parseFloat(lambda), parseFloat(mu), tipo, ctx);
-        alert("Resultado: " + resultado);
+        const resultados = calcularMM1(parseFloat(lambda), parseFloat(mu), tipo, ctx);
+        mostrarResultadosMM1(resultados);
     }
 });
 
@@ -95,7 +95,14 @@ contenedorCalculo.addEventListener("submit", function (event) {
 contenedorCalculo.addEventListener("reset", function (event) {
     const form = event.target;
     if (form.id === "form-activo") {
+        // Limpiar mensajes de error
         form.querySelectorAll(".error-message").forEach(span => span.textContent = "");
+
+         // Ocultar sección de resultados
+        const seccionResultados = document.getElementById("resultados");
+        if (seccionResultados) {
+            seccionResultados.style.display = "none";
+        }
     }
 });
 
@@ -107,21 +114,45 @@ contenedorCalculo.addEventListener("reset", function (event) {
 
 
 // Función de cálculo MM1 (ejemplo, reemplazar con tu lógica real)
-function calcularMM1(lambda, mu, tipo, contexto) {
+function calcularMM1(lambda, mu) {
     const rho = lambda / mu;
-    let resultado;
+    const P0 = 1 - rho;
+    const L = lambda / (mu - lambda);
+    const Lq = (lambda * lambda) / (mu * (mu - lambda));
+    const W = 1 / (mu - lambda);
+    const Wq = lambda / (mu * (mu - lambda));
 
-    if (rho >= 1) {
-        return "El sistema no es estable (ρ ≥ 1)";
-    }
+    return { rho, P0, L, Lq, W, Wq };
+}
 
-    if (tipo === "exactamente" && contexto === "sistema") {
-        resultado = "Ejemplo de cálculo exacto para sistema";
-    } else if (tipo === "exactamente" && contexto === "cola") {
-        resultado = "Ejemplo de cálculo exacto para cola";
-    } else {
-        resultado = `ρ = ${rho.toFixed(3)} (estabilidad asegurada)`;
-    }
 
-    return resultado;
+function mostrarResultadosMM1(resultados) {
+    const seccionResultados = document.getElementById("resultados");
+    const contenedor = document.getElementById("resultados-container");
+
+    contenedor.innerHTML = ""; // limpiar
+
+    const tarjetas = [
+        { simbolo: "📦 P₀", valor: resultados.P0.toFixed(4), desc: "Probabilidad de que el sistema esté vacío", formula: "P₀ = 1 - ρ" },
+        { simbolo: "🔄 ρ", valor: resultados.rho.toFixed(4), desc: "Tasa de utilización del sistema", formula: "ρ = λ / μ" },
+        { simbolo: "🧍‍♂️ L", valor: resultados.L.toFixed(4), desc: "Clientes promedio en el sistema", formula: "L = λ / (μ - λ)" },
+        { simbolo: "📥 Lq", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en la cola", formula: "Lq = λ² / (μ(μ - λ))" },
+        { simbolo: "⏱ W", valor: resultados.W.toFixed(4) + " min", desc: "Tiempo promedio en el sistema", formula: "W = 1 / (μ - λ)" },
+        { simbolo: "⌛ Wq", valor: resultados.Wq.toFixed(4) + " min", desc: "Tiempo promedio en la cola", formula: "Wq = λ / (μ(μ - λ))" },
+    ];
+
+    tarjetas.forEach(t => {
+        const card = document.createElement("div");
+        card.className = "resultado-card";
+        card.innerHTML = `
+            <div class="simbolo"><strong>${t.simbolo}</strong></div>
+            <div class="valor">${t.valor}</div>
+            <div class="descripcion">${t.desc}</div>
+            <div class="tooltip">${t.formula}</div>
+        `;
+        contenedor.appendChild(card);
+    });
+
+    seccionResultados.style.display = "block";
+    seccionResultados.scrollIntoView({ behavior: "smooth" });
 }
