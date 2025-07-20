@@ -83,7 +83,23 @@
 
     <!-- 🔹 Formularios ocultos para cada modelo -->
   <div style="display: none;">
-  <div id="form-mm1" class="formulario-modelo"></div>
+
+  <div id="form-mm1" class="formulario-modelo">
+    <h3>Modelo M/M/1</h3>
+
+    <form id="mm1-form">
+    <label for="lambda">Tasa de llegada (λ):</label>
+    <input type="number" step="any" id="lambda" name="lambda" required />
+
+    <label for="mu">Tasa de servicio (μ):</label>
+    <input type="number" step="any" id="mu" name="mu" required />
+
+    <button type="submit">Calcular</button>
+    </form>
+    
+  </div>
+
+
   <div id="form-mm2" class="formulario-modelo"></div>
   <div id="form-mm1n" class="formulario-modelo"></div>
   <div id="form-prioridades" class="formulario-modelo"></div>
