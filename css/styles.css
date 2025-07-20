@@ -168,6 +168,18 @@ body {
 }
 
 /* =======================
+   Estilos de errores
+   ======================= */
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 8px;
+  min-height: 16px; /* para mantener espacio aunque no haya error */
+}
+
+
+/* =======================
    Formulario estilos generales
    ======================= */
 form {
@@ -265,7 +277,6 @@ footer {
 /* =======================
    Responsive
    ======================= */
-
 
 @media (max-width: 700px) {
   .tarjetas-modelos {
