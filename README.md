@@ -1,53 +1,81 @@
-📝 README — Proyecto: Calculadora de Modelos de Colas
+# 🎓 Calculadora de Modelos de Colas
 
-🌐 Visítalo en línea
-📡 Esta aplicación está disponible como sitio web en GitHub Pages. ➡️ URL pública: https://<tu-usuario>.github.io/<nombre-del-repo> (Sustituí con el nombre de tu usuario y repositorio)
+🚀 Simulador interactivo para analizar sistemas de colas mediante modelos clásicos de teoría. Ideal para estudiantes, docentes y entusiastas del rendimiento de sistemas.
 
-📘 Descripción
-Este simulador permite analizar el comportamiento de sistemas de colas mediante distintos modelos clásicos de la teoría:
+<p align="center">
+  <a href="https://matiashuangyue.github.io/Calculadora-Teoria-De-Cola/">
+    <img src="https://img.shields.io/badge/GitHub%20Pages-live-blue?logo=github" alt="GitHub Pages">
+  </a>
+  <img src="https://img.shields.io/badge/Made%20with-JavaScript-yellow?logo=javascript" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Responsive-Yes-brightgreen" alt="Responsive">
+</p>
 
-M/M/1
+---
 
-M/M/2 (con variantes: servidores iguales, distintos, selección y evaluación)
+## 🌐 Probar online
 
-M/M/1/N
+📎 Accedé al simulador aquí 👉 [Calculadora en vivo](https://matiashuangyue.github.io/Calculadora-Teoria-De-Cola/)
 
-M/D/1
+> Aplicación web optimizada para desktop y dispositivos móviles
 
-M/G/1
+---
 
-Modelo con Prioridades
+## 📘 Modelos incluidos
 
-Además incluye un convertidor lateral de unidades de tiempo, para facilitar la interpretación de tasas y resultados.
+- **M/M/1**
+- **M/M/2** (con 4 variantes)
+- **M/M/1/N**
+- **M/D/1**
+- **M/G/1**
+- **Modelo con Prioridades**
 
-🎯 Funcionalidades
-✅ Validación integrada con mensajes de error visibles
+🧮 Incluye un **convertidor flotante de unidades de tiempo** ⏱ para segundos, minutos y horas.
 
-📊 Visualización de resultados mediante tarjetas con fórmulas
+---
 
-🧠 Cálculo automático con desplazamiento y estilo personalizado
+## 🎯 Funcionalidades
 
-⏱ Convertidor flotante de unidades de tiempo (segundos, minutos, horas)
+| 🛠 Característica                  | 📝 Descripción                                                                 |
+|----------------------------------|--------------------------------------------------------------------------------|
+| 📋 Validación en tiempo real     | Mensajes de error automáticos debajo de cada campo                            |
+| 🔄 Cálculo automático             | Resultados generados al instante con fórmulas integradas                      |
+| 📊 Visualización con tarjetas    | Interfaz ordenada y resultados claros por modelo                              |
+| ⏳ Convertidor lateral interactivo| Equivalencia dinámica entre unidades de tiempo                                |
+| 🧩 Modularidad por modelo        | Código separado por cada tipo de simulación para escalabilidad futura         |
 
-📁 Modularidad en el código: cada modelo tiene su propia función de cálculo y validación
+---
 
-🚀 ¿Cómo usarlo?
-Ingresá a la versión online vía GitHub Pages
+## 🚀 ¿Cómo usarlo?
 
-Seleccioná un modelo desde la interfaz principal
+1. Visitá el simulador online
+2. Elegí un modelo desde el menú desplegable
+3. Ingresá los datos según la unidad temporal deseada
+4. Utilizá el convertidor si necesitás verificar equivalencias
+5. Presioná **Calcular** y explorá los resultados debajo
 
-Completá los datos según la unidad de tiempo elegida
+---
 
-Usá el convertidor para verificar equivalencias
+## 🧠 Recomendaciones
 
-Presioná Calcular y desplazate a los resultados
+- Usar siempre la misma unidad de tiempo para cada cálculo (ej: minutos)
+- El convertidor ayuda a transformar valores entre unidades
+- El sistema verifica la **estabilidad** antes de calcular resultados
 
-⚠️ Consideraciones
-Todos los valores de tasa y tiempo deben estar en la misma unidad (por ejemplo, por minuto).
 
-El sistema verifica la estabilidad del modelo antes de mostrar resultados.
+---
 
-Los resultados de tiempos se muestran en la unidad utilizada en el ingreso.
+## 👤 Autor
 
-🎨 Créditos
-Desarrollado por Yue con enfoque en precisión académica, funcionalidad aplicada y diseño intuitivo. La estructura modular permite escalabilidad para futuros modelos o visualizaciones.
+Desarrollado con precisión por **Yue**  
+💡 Enfocado en aplicabilidad académica y diseño funcional  
+📦 Publicado vía [GitHub Pages](https://matiashuangyue.github.io/Calculadora-Teoria-De-Cola/)
+
+---
+
+## 📌 Licencia
+
+Este proyecto es libre de uso para fines educativos, y puede ser adaptado o ampliado bajo atribución.
+
+---
+
+¿Querés que te prepare la imagen preview en base a tu simulador real y te dé el link para subirla? También te puedo dejar una variante del README en inglés si pensás hacerlo más global 🌍.
