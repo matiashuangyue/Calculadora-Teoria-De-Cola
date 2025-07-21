@@ -105,6 +105,15 @@ contenedorCalculo.addEventListener("submit", function (event) {
         mostrarResultadosMD1(resultados);
     }
 
+    if (form.classList.contains("mg1")) {
+        const { valido, lambda, es, theta, mu, rho } = validarCamposMG1(form);
+        if (!valido) return;
+
+        const resultados = calcularMG1(lambda, es, theta, mu, rho);
+        mostrarResultadosMG1(resultados);
+    }
+
+
 
 
 

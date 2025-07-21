@@ -323,7 +323,44 @@
   </form>
 </div>
 
-  <div id="form-mg1" class="formulario-modelo"></div>
+  <div id="form-mg1" class="formulario-modelo">
+  <h3>Modelo M/G/1</h3>
+  <form id="mg1-form">
+    <div class="grupo-inputs">
+      <label for="lambda">Tasa de llegada (λ en clientes/hora):
+        <input type="number" step="any" id="lambda" name="lambda" />
+        <span class="error-message" id="error-lambda"></span>
+      </label>
+
+      <label for="es">E(s) - Tiempo promedio de servicio:
+        <input type="number" step="any" id="es" name="es" />
+        <select id="unidadES">
+          <option value="segundos">seg</option>
+          <option value="minutos" selected>min</option>
+          <option value="horas">h</option>
+        </select>
+        <span class="error-message" id="error-es"></span>
+      </label>
+
+      <label for="theta">θ - Varianza del servicio:
+        <input type="number" step="any" id="theta" name="theta" />
+        <select id="unidadTheta">
+          <option value="segundos">seg²</option>
+          <option value="minutos" selected>min²</option>
+          <option value="horas">h²</option>
+        </select>
+        <span class="error-message" id="error-theta"></span>
+      </label>
+
+    </div>
+
+    <div class="botones">
+      <button type="submit">Calcular</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+</div>
+
 </div>
 
 
