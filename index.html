@@ -188,7 +188,7 @@
         
           <div class="grupo-inputs">
           <label for ='numero de clientes'>Número de clientes:
-            <input type="number" step="any" id="numeroClientes" name="numeroClientes" />
+            <input type="number" id="numeroClientes" name="numeroClientes" />
             <span class="error-message" id="error-numeroClientes"></span>
           </label>
 
@@ -216,7 +216,82 @@
             </div>
         </form>
   </div>
-  <div id="form-prioridades" class="formulario-modelo"></div>
+
+ <div id="form-prioridades" class="formulario-modelo">
+      <h3>Modelo con Prioridades</h3>
+      <form id="prioridades-form">
+        
+      <label for="tipoPrioridad">Tipo de cálculo:
+        <select id="tipoPrioridad" name="tipoPrioridad">
+          <option value="lambda_mu">Usar λ y μ</option>
+          <option value="q_ts">Usar Q y Ts</option>
+        </select>
+        <span class="error-message" id="error-tipoPrioridad"></span>
+      </label>
+        
+        <!-- Grupo 1: lambda, mu -->
+        <div id="grupo-lambda-mu" class="grupo-prioridad">
+          <div class="grupo-inputs">
+          <label for="w0">W₀:
+            <input type="number" step="any" id="w0" name="w0" />
+            <span class="error-message" id="error-w0"></span>
+          </label>
+
+          <label for="lambda1">λ₁:
+            <input type="number" step="any" id="lambda1" name="lambda1" />
+            <span class="error-message" id="error-lambda1"></span>
+          </label>
+
+          <label for="lambda2">λ₂:
+            <input type="number" step="any" id="lambda2" name="lambda2" />
+            <span class="error-message" id="error-lambda2"></span>
+          </label>
+
+          <label for="mu">μ:
+            <input type="number" step="any" id="mu" name="mu" />
+            <span class="error-message" id="error-mu"></span>
+          </label>
+          </div>
+        </div>
+
+        <!-- Grupo 2: Q y Ts -->
+        <div id="grupo-q-ts" class="grupo-prioridad" style="display: none;">
+          <div class="grupo-inputs">
+          <label for="w0b">W₀:
+            <input type="number" step="any" id="w0b" name="w0b" />
+            <span class="error-message" id="error-w0b"></span>
+          </label>
+
+          <label for="q1">Q₁:
+            <input type="number" step="any" id="q1" name="q1" />
+            <span class="error-message" id="error-q1"></span>
+          </label>
+
+          <label for="ts1">Ts₁:
+            <input type="number" step="any" id="ts1" name="ts1" />
+            <span class="error-message" id="error-ts1"></span>
+          </label>
+
+          <label for="q2">Q₂:
+            <input type="number" step="any" id="q2" name="q2" />
+            <span class="error-message" id="error-q2"></span>
+          </label>
+
+          <label for="ts2">Ts₂:
+            <input type="number" step="any" id="ts2" name="ts2" />
+            <span class="error-message" id="error-ts2"></span>
+          </label>
+
+        </div>
+        </div>
+        <div class="botones">
+          <button type="submit">Calcular</button>
+          <button type="reset">Limpiar</button>
+        </div>
+      </form>
+  </div>
+
+
   <div id="form-md1" class="formulario-modelo"></div>
   <div id="form-mg1" class="formulario-modelo"></div>
 </div>

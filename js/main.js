@@ -32,6 +32,26 @@ tarjetas.forEach(tarjeta => {
             wrapperForm.classList.add(modelo); // modelo será: "mm1", "mm2", etc.
             console.log("Clase asignada al formulario:", wrapperForm.classList);
 
+            // Agregar el formulario clonado al contenedor
+            // cambiar el comportamiento según el modelo
+            // cambiar modo de calculo según el seleccion de prioridades
+            if (modelo === "prioridades") {
+                const tipoSelect = wrapperForm.querySelector("#tipoPrioridad");
+                const grupoLambdaMu = wrapperForm.querySelector("#grupo-lambda-mu");
+                const grupoQTs = wrapperForm.querySelector("#grupo-q-ts");
+
+                if (tipoSelect) {
+                    tipoSelect.addEventListener("change", () => {
+                    const opcion = tipoSelect.value;
+                    grupoLambdaMu.style.display = opcion === "lambda_mu" ? "block" : "none";
+                    grupoQTs.style.display = opcion === "q_ts" ? "block" : "none";
+                    console.log("Opción seleccionada:", opcion);
+                    });
+                }
+            }
+            //-------------------------------------------------------------------------------------
+
+
 
             contenedorCalculo.appendChild(wrapper);
             contenedorCalculo.scrollIntoView({ behavior: "smooth" });
@@ -65,6 +85,43 @@ contenedorCalculo.addEventListener("submit", function (event) {
         mostrarResultadosMM2(resultados);
     }
 
+    if (form.classList.contains("mm1n")) {
+        const { valido, lambda, mu, n, numeroClientes, tipoCalculo, contexto } = validarCamposMM1N(form);
+        if (!valido) return;
+
+        const resultados = calcularMM1N(lambda, mu, n, numeroClientes, tipoCalculo, contexto);
+        mostrarResultadosMM1N(resultados);
+    }
+
+
+        
+
+   if (form.classList.contains("prioridades")) {
+  const validacion = validarCamposPrioridades(form);
+  if (!validacion.valido) return;
+
+  let resultados;
+
+  if (validacion.tipo === "lambda_mu") {
+    resultados = calcularPrioridadesLambdaMu(validacion.w0, validacion.lambda1, validacion.lambda2, validacion.mu);
+  }
+
+  if (validacion.tipo === "q_ts") {
+    resultados = calcularPrioridadesQTs(validacion.w0, validacion.q1, validacion.ts1, validacion.q2, validacion.ts2);
+  }
+
+  mostrarResultadosPrioridades(resultados);
+}
+
+
+   
+
+
+    
+
+
+    
+
     // Agregás más modelos aquí en el futuro...
 });
 
@@ -95,6 +152,7 @@ contenedorCalculo.addEventListener("submit", function (event) {
         mostrarResultadosMM2(resultados);
     }
 });
+
 });
 
 function limpiarErrores(form) {
