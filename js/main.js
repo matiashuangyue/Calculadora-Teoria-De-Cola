@@ -46,6 +46,7 @@ tarjetas.forEach(tarjeta => {
                     grupoLambdaMu.style.display = opcion === "lambda_mu" ? "block" : "none";
                     grupoQTs.style.display = opcion === "q_ts" ? "block" : "none";
                     console.log("Opción seleccionada:", opcion);
+                    OcultarResultados();
                     });
                 }
             }
@@ -92,6 +93,19 @@ contenedorCalculo.addEventListener("submit", function (event) {
         const resultados = calcularMM1N(lambda, mu, n, numeroClientes, tipoCalculo, contexto);
         mostrarResultadosMM1N(resultados);
     }
+
+    if (form.classList.contains("md1")) {
+        const { valido, lambda, es, mu, rho } = validarCamposMD1(form);
+
+        if (!valido) return;
+
+        const resultados = calcularMD1(lambda, es, mu, rho);
+
+
+        mostrarResultadosMD1(resultados);
+    }
+
+
 
 
         

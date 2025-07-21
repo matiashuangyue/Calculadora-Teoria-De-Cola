@@ -292,7 +292,37 @@
   </div>
 
 
-  <div id="form-md1" class="formulario-modelo"></div>
+  <div id="form-md1" class="formulario-modelo">
+  <h3>Modelo M/D/1</h3>
+  <form id="md1-form">
+    <div class="grupo-inputs">
+      <label for="lambda">Tasa de llegada (λ en clientes/hora):
+        <input type="number" step="any" id="lambda" name="lambda" />
+        <span class="error-message" id="error-lambda"></span>
+      </label>
+
+      <label for="servicio">E(s)Tiempo de servicio por cliente:
+        <input type="number" step="any" id="es" name="es" />
+        <span class="error-message" id="error-es"></span>
+      </label>
+
+      <label for="unidadTiempo">Unidad de Tiempo de servicio:
+        <select id="unidadTiempo" name="unidadTiempo">
+          <option value="segundos">Segundos</option>
+          <option value="minutos" selected>Minutos</option>
+          <option value="horas">Horas</option>
+        </select>
+        <span class="error-message" id="error-unidadTiempo"></span>
+      </label>
+    </div>
+
+    <div class="botones">
+      <button type="submit">Calcular</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+</div>
+
   <div id="form-mg1" class="formulario-modelo"></div>
 </div>
 
@@ -314,12 +344,13 @@
     <a href="https://github.com/matiashuangyue" target="_blank">🔗 GitHub</a>
   </footer>
 
-  <script src="js/main.js"></script>
+  
   <script src="js/mm1.js"></script>
   <script src="js/mm2.js"></script>
   <script src="js/mm1n.js"></script>
   <script src="js/prioridades.js"></script>
   <script src="js/md1.js"></script>
   <script src="js/mg1.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
