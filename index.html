@@ -110,6 +110,7 @@
   <div id="form-mm1" class="formulario-modelo">
     <h3>Modelo M/M/1</h3>
         <form id="mm1-form">
+             <p class="nota-unidad-tiempo">💡 Aclaración: Usar la misma unidad de tiempo para λ y μ (por minuto, por hora, etc.). Los resultados como tiempos de espera se expresarán en esa unidad.</p>
           <div class="grupo-inputs">
             <label for="lambda">Tasa de llegada (λ):
               <input type="number" step="any" id="lambda" name="lambda" />
@@ -146,47 +147,118 @@
         </form>
 
   </div>
+<div id="form-mm2" class="formulario-modelo">
+  <h3>Modelo M/M/2 Avanzado</h3>
+  <form id="mm2-form">
 
+    <!-- Selector de variante -->
+    <label for="tipoMM2">Tipo de cálculo:
+      <select id="tipoMM2" name="tipoMM2">
+        <option value="igual">Servidores iguales</option>
+        <option value="distinto">Servidores distintos</option>
+        <option value="seleccion">Con/Sin selección</option>
+        <option value="evaluar">Evaluar tercer servidor</option>
+      </select>
+      <span class="error-message" id="error-tipoMM2"></span>
+    </label>
+    <p class="nota-unidad-tiempo">💡 Importante: Usar siempre la misma unidad de tiempo para λ y μ (por minuto, por hora, etc.). Los tiempos de espera se expresan en esa misma unidad.</p>
 
-  <div id="form-mm2" class="formulario-modelo">
+    <!-- Grupo: Servidores iguales -->
+    <div id="grupo-igual" class="grupo-mm2">
+      <p class="nota-unidad-tiempo">⏱ Esta opción calcula tasas y tiempos suponiendo que los dos servidores tienen la misma velocidad de atención. La unidad de tiempo usada se mantiene en los resultados.</p>
+      <div class="grupo-inputs">
+        <label for="lambdaIgual">Tasa de llegada (λ):
+          <input type="number" step="any" id="lambdaIgual" name="lambdaIgual" />
+          <span class="error-message" id="error-lambdaIgual"></span>
+        </label>
 
-     <h3>Modelo M/M/2</h3>
-        <form id="mm2-form">
-        <div class="grupo-inputs">
-          <label for="lambda">Tasa de llegada (λ):
-            <input type="number" step="any" id="lambda" name="lambda" />
-            <span class="error-message" id="error-lambda"></span>
-          </label>
+        <label for="muIgual">Tasa de servicio por servidor (μ):
+          <input type="number" step="any" id="muIgual" name="muIgual" />
+          <span class="error-message" id="error-muIgual"></span>
+        </label>
 
-          <label for="mu1">Tasa de servicio 1 (μ1):
-            <input type="number" step="any" id="mu1" name="mu1" />
-            <span class="error-message" id="error-mu1"></span>
-          </label>
+        <label for="nIgual">Número de clientes (n):
+          <input type="number" step="1" id="nIgual" name="nIgual" />
+          <span class="error-message" id="error-nIgual"></span>
+        </label>
+      </div>
+    </div>
 
-          <label for="mu2">Tasa de servicio 2 (μ2):
-            <input type="number" step="any" id="mu2" name="mu2" />
-            <span class="error-message" id="error-mu2"></span>
-          </label>
+    <!-- Grupo: Servidores distintos -->
+    <div id="grupo-distinto" class="grupo-mm2" style="display: none;">
+      <p class="nota-unidad-tiempo">⏱ En esta variante cada servidor tiene su propia tasa de servicio. Las tasas λ, μ₁ y μ₂ deben estar en la misma unidad.</p>
+      <div class="grupo-inputs">
+        <label for="lambdaDistinto">Tasa de llegada (λ):
+          <input type="number" step="any" id="lambdaDistinto" name="lambdaDistinto" />
+          <span class="error-message" id="error-lambdaDistinto"></span>
+        </label>
 
-          <label for="modoseleccion">Modo de Seleccion:
-            <select id="modoseleccion" name="modoseleccion">
-            <option value="conseleccion">Con Seleccion</option>
-            <option value="sinseleccion" selected>Sin Seleccion</option>
-            </select>
-            <span class="error-message" id="error-modoseleccion"></span>
-          </label>
-        </div>
-            <div class="botones">
-                <button type="submit">Calcular</button>
-                <button type="reset">Limpiar</button>
-            </div>
-        </form>
+        <label for="mu1">μ₁:
+          <input type="number" step="any" id="mu1" name="mu1" />
+          <span class="error-message" id="error-mu1"></span>
+        </label>
 
-  </div>
+        <label for="mu2">μ₂:
+          <input type="number" step="any" id="mu2" name="mu2" />
+          <span class="error-message" id="error-mu2"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Grupo: Con/Sin selección -->
+    <div id="grupo-seleccion" class="grupo-mm2" style="display: none;">
+      <p class="nota-unidad-tiempo">⏱ Esta opción compara qué sucede si los clientes eligen el servidor más rápido. λ, μ₁ y μ₂ deben compartir la misma unidad temporal.</p>
+      <div class="grupo-inputs">
+        <label for="lambdaSel">Tasa de llegada (λ):
+          <input type="number" step="any" id="lambdaSel" name="lambdaSel" />
+          <span class="error-message" id="error-lambdaSel"></span>
+        </label>
+
+        <label for="mu1Sel">μ₁:
+          <input type="number" step="any" id="mu1Sel" name="mu1Sel" />
+          <span class="error-message" id="error-mu1Sel"></span>
+        </label>
+
+        <label for="mu2Sel">μ₂:
+          <input type="number" step="any" id="mu2Sel" name="mu2Sel" />
+          <span class="error-message" id="error-mu2Sel"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Grupo: Evaluar tercer servidor -->
+    <div id="grupo-evaluar" class="grupo-mm2" style="display: none;">
+      <p class="nota-unidad-tiempo">⏱ Este análisis evalúa si incorporar un tercer servidor mejora la estabilidad. λ, μ actual y μ₃ deben estar en la misma unidad de tiempo.</p>
+      <div class="grupo-inputs">
+        <label for="lambdaEval">Tasa de llegada (λ):
+          <input type="number" step="any" id="lambdaEval" name="lambdaEval" />
+          <span class="error-message" id="error-lambdaEval"></span>
+        </label>
+
+        <label for="muEval">μ actual:
+          <input type="number" step="any" id="muEval" name="muEval" />
+          <span class="error-message" id="error-muEval"></span>
+        </label>
+
+        <label for="mu3Eval">μ₃ (tercer servidor):
+          <input type="number" step="any" id="mu3Eval" name="mu3Eval" />
+          <span class="error-message" id="error-mu3Eval"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="botones">
+      <button type="submit">Calcular</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+</div>
+
 
   <div id="form-mm1n" class="formulario-modelo">
     <h3>Modelo M/M/1/N</h3>
         <form id="mm1n-form">
+            <p class="nota-unidad-tiempo">💡 Aclaración: Usar la misma unidad de tiempo para λ y μ (por minuto, por hora, etc.). Los resultados como tiempos de espera se expresarán en esa unidad.</p>
         <div class="grupo-inputs">
           <label for="lambda">Tasa de llegada (λ):
             <input type="number" step="any" id="lambda" name="lambda" />
@@ -236,80 +308,83 @@
             </div>
         </form>
   </div>
+<div id="form-prioridades" class="formulario-modelo">
+  <h3>Modelo con Prioridades</h3>
+  <form id="prioridades-form">
 
- <div id="form-prioridades" class="formulario-modelo">
-      <h3>Modelo con Prioridades</h3>
-      <form id="prioridades-form">
-        
-      <label for="tipoPrioridad">Tipo de cálculo:
-        <select id="tipoPrioridad" name="tipoPrioridad">
-          <option value="lambda_mu">Usar λ y μ</option>
-          <option value="q_ts">Usar Q y Ts</option>
-        </select>
-        <span class="error-message" id="error-tipoPrioridad"></span>
-      </label>
-        
-        <!-- Grupo 1: lambda, mu -->
-        <div id="grupo-lambda-mu" class="grupo-prioridad">
-          <div class="grupo-inputs">
-          <label for="w0">W₀:
-            <input type="number" step="any" id="w0" name="w0" />
-            <span class="error-message" id="error-w0"></span>
-          </label>
+    <label for="tipoPrioridad">Tipo de cálculo:
+      <select id="tipoPrioridad" name="tipoPrioridad">
+        <option value="lambda_mu">Usar λ y μ</option>
+        <option value="q_ts">Usar Q y Ts</option>
+      </select>
+      <span class="error-message" id="error-tipoPrioridad"></span>
+    </label>
 
-          <label for="lambda1">λ₁:
-            <input type="number" step="any" id="lambda1" name="lambda1" />
-            <span class="error-message" id="error-lambda1"></span>
-          </label>
+    <p class="nota-unidad-tiempo">💡 Aclaración: Asegurarse de usar la misma unidad de tiempo para λ, μ, Ts y W₀. Ejemplo: por minuto, por hora. Los resultados se expresan en esa unidad.</p>
 
-          <label for="lambda2">λ₂:
-            <input type="number" step="any" id="lambda2" name="lambda2" />
-            <span class="error-message" id="error-lambda2"></span>
-          </label>
+    <!-- Grupo 1: λ y μ -->
+    <div id="grupo-lambda-mu" class="grupo-prioridad">
+      <p class="nota-unidad-tiempo">⏱ Este método calcula tiempos usando tasas λ y μ. Todos deben estar expresados en la misma unidad de tiempo.</p>
+      <div class="grupo-inputs">
+        <label for="w0">W₀:
+          <input type="number" step="any" id="w0" name="w0" />
+          <span class="error-message" id="error-w0"></span>
+        </label>
 
-          <label for="mu">μ:
-            <input type="number" step="any" id="mu" name="mu" />
-            <span class="error-message" id="error-mu"></span>
-          </label>
-          </div>
-        </div>
+        <label for="lambda1">λ₁:
+          <input type="number" step="any" id="lambda1" name="lambda1" />
+          <span class="error-message" id="error-lambda1"></span>
+        </label>
 
-        <!-- Grupo 2: Q y Ts -->
-        <div id="grupo-q-ts" class="grupo-prioridad" style="display: none;">
-          <div class="grupo-inputs">
-          <label for="w0b">W₀:
-            <input type="number" step="any" id="w0b" name="w0b" />
-            <span class="error-message" id="error-w0b"></span>
-          </label>
+        <label for="lambda2">λ₂:
+          <input type="number" step="any" id="lambda2" name="lambda2" />
+          <span class="error-message" id="error-lambda2"></span>
+        </label>
 
-          <label for="q1">Q₁:
-            <input type="number" step="any" id="q1" name="q1" />
-            <span class="error-message" id="error-q1"></span>
-          </label>
+        <label for="mu">μ:
+          <input type="number" step="any" id="mu" name="mu" />
+          <span class="error-message" id="error-mu"></span>
+        </label>
+      </div>
+    </div>
 
-          <label for="ts1">Ts₁:
-            <input type="number" step="any" id="ts1" name="ts1" />
-            <span class="error-message" id="error-ts1"></span>
-          </label>
+    <!-- Grupo 2: Q y Ts -->
+    <div id="grupo-q-ts" class="grupo-prioridad" style="display: none;">
+      <p class="nota-unidad-tiempo">⏱ Este método usa cantidades Q y tiempos de servicio Ts. Asegúrese que Ts y W₀ estén en la misma unidad temporal.</p>
+      <div class="grupo-inputs">
+        <label for="w0b">W₀:
+          <input type="number" step="any" id="w0b" name="w0b" />
+          <span class="error-message" id="error-w0b"></span>
+        </label>
 
-          <label for="q2">Q₂:
-            <input type="number" step="any" id="q2" name="q2" />
-            <span class="error-message" id="error-q2"></span>
-          </label>
+        <label for="q1">Q₁:
+          <input type="number" step="any" id="q1" name="q1" />
+          <span class="error-message" id="error-q1"></span>
+        </label>
 
-          <label for="ts2">Ts₂:
-            <input type="number" step="any" id="ts2" name="ts2" />
-            <span class="error-message" id="error-ts2"></span>
-          </label>
+        <label for="ts1">Ts₁:
+          <input type="number" step="any" id="ts1" name="ts1" />
+          <span class="error-message" id="error-ts1"></span>
+        </label>
 
-        </div>
-        </div>
-        <div class="botones">
-          <button type="submit">Calcular</button>
-          <button type="reset">Limpiar</button>
-        </div>
-      </form>
-  </div>
+        <label for="q2">Q₂:
+          <input type="number" step="any" id="q2" name="q2" />
+          <span class="error-message" id="error-q2"></span>
+        </label>
+
+        <label for="ts2">Ts₂:
+          <input type="number" step="any" id="ts2" name="ts2" />
+          <span class="error-message" id="error-ts2"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="botones">
+      <button type="submit">Calcular</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+</div>
 
 
   <div id="form-md1" class="formulario-modelo">
@@ -393,6 +468,32 @@
         <!-- Aquí se insertan dinámicamente las tarjetas desde JavaScript -->
     </div>
 </section>
+
+<!-- 🔹 Sección de convertidor tiempo -->
+ <div id="convertidor-tiempo" class="convertidor-flotante">
+  <h3>🕒 Convertidor de Tiempo</h3>
+  <label for="valorTiempo">Valor:
+    <input type="number" step="any" id="valorTiempo" placeholder="Ej: 1.5" />
+  </label>
+
+  <label for="unidadOrigen">Unidad:
+    <select id="unidadOrigen">
+      <option value="segundos">Segundos</option>
+      <option value="minutos" selected>Minutos</option>
+      <option value="horas">Horas</option>
+    </select>
+  </label>
+
+  <div id="resultadoConvertido" class="columna-equivalencias">
+  <span id="equivalenteSeg">🕓 — seg</span><br>
+  <span id="equivalenteMin">⏱ — min</span><br>
+  <span id="equivalenteHora">⌛ — h</span>
+</div>
+
+
+  <button type="reset">Limpiar</button>
+</div>
+
 
 
 <!-- 🔹 Footer -->

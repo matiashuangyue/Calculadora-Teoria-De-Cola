@@ -51,6 +51,32 @@ tarjetas.forEach(tarjeta => {
                 }
             }
             //-------------------------------------------------------------------------------------
+            if (modelo === "mm2") {
+                const tipoSelect = wrapperForm.querySelector("#tipoMM2");
+                const gruposMM2 = wrapperForm.querySelectorAll(".grupo-mm2");
+
+                if (tipoSelect) {
+                    tipoSelect.addEventListener("change", () => {
+                    const tipo = tipoSelect.value;
+
+                    // Ocultar todos los grupos primero
+                    gruposMM2.forEach(grupo => {
+                        grupo.style.display = "none";
+                    });
+
+                    // Mostrar solo el grupo seleccionado
+                    const grupoActivo = wrapperForm.querySelector(`#grupo-${tipo}`);
+                    if (grupoActivo) grupoActivo.style.display = "grid";
+
+                    OcultarResultados();
+                    });
+
+                    // Disparar evento inicial para mostrar grupo correcto
+                    tipoSelect.dispatchEvent(new Event("change"));
+                }
+            }
+
+            //-------------------------------------------------------------------------------------
 
 
 
@@ -80,11 +106,38 @@ contenedorCalculo.addEventListener("submit", function (event) {
     }
 
     if (form.classList.contains("mm2")) {
-        const { valido, lambda, mu1, mu2, seleccion } = validarCamposMM2(form);
-        if (!valido) return;
-        const resultados = calcularMM2(lambda, mu1, mu2, seleccion);
-        mostrarResultadosMM2(resultados);
-    }
+  const tipoSelect = form.querySelector("#tipoMM2");
+  const tipo = tipoSelect ? tipoSelect.value : null;
+
+  if (tipo === "igual") {
+    const validacion = validarCamposMM2Igual(form);
+    if (!validacion.valido) return;
+    const resultados = calcularMM2Igual(validacion.lambda, validacion.mu, validacion.n);
+    mostrarResultadosMM2Igual(resultados);
+  }
+
+  else if (tipo === "distinto") {
+    const validacion = validarCamposMM2Distinto(form);
+    if (!validacion.valido) return;
+    const resultados = calcularMM2Distinto(validacion.lambda, validacion.mu1, validacion.mu2);
+    mostrarResultadosMM2Distinto(resultados);
+  }
+
+  else if (tipo === "seleccion") {
+    const validacion = validarCamposMM2Seleccion(form);
+    if (!validacion.valido) return;
+    const resultados = calcularMM2Seleccion(validacion.lambda, validacion.mu1, validacion.mu2);
+    mostrarResultadosMM2Seleccion(resultados);
+  }
+
+  else if (tipo === "evaluar") {
+    const validacion = validarCamposMM2Evaluar(form);
+    if (!validacion.valido) return;
+    const resultados = evaluarTercerServidor(validacion.lambda, validacion.mu2, validacion.mu3);
+    mostrarResultadosMM2Evaluar(resultados);
+  }
+}
+
 
     if (form.classList.contains("mm1n")) {
         const { valido, lambda, mu, n, numeroClientes, tipoCalculo, contexto } = validarCamposMM1N(form);
@@ -136,15 +189,6 @@ contenedorCalculo.addEventListener("submit", function (event) {
   mostrarResultadosPrioridades(resultados);
 }
 
-
-   
-
-
-    
-
-
-    
-
     // Agregás más modelos aquí en el futuro...
 });
 
@@ -162,11 +206,21 @@ contenedorCalculo.addEventListener("reset", function (event) {
     }
 });
 
+contenedorCalculo.addEventListener("input", e => {
+  const errorSpan = e.target.closest("label")?.querySelector(".error-message");
+  if (errorSpan) errorSpan.textContent = "";
 });
 
+
+
+});
+
+
 function limpiarErrores(form) {
-    form.querySelectorAll(".error-message").forEach(span => span.textContent = "");
+  // Limpiar todos los mensajes de error
+  form.querySelectorAll(".error-message").forEach(span => span.textContent = "");
 }
+
 
 function OcultarResultados() {
     const seccionResultados = document.getElementById("resultados");
@@ -174,3 +228,48 @@ function OcultarResultados() {
         seccionResultados.style.display = "none";
     }
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const valorInput = document.getElementById("valorTiempo");
+  const unidadSelect = document.getElementById("unidadOrigen");
+  const equivalenteSeg = document.getElementById("equivalenteSeg");
+  const equivalenteMin = document.getElementById("equivalenteMin");
+  const equivalenteHora = document.getElementById("equivalenteHora");
+
+  function actualizarResultado() {
+    const valor = parseFloat(valorInput.value);
+    const unidad = unidadSelect.value;
+
+    if (isNaN(valor) || valor <= 0) {
+      equivalenteSeg.textContent  = "🕓 — seg";
+      equivalenteMin.textContent  = "⏱ — min";
+      equivalenteHora.textContent = "⌛ — h";
+      return;
+    }
+
+    const segundos = unidad === "segundos" ? valor :
+                     unidad === "minutos" ? valor * 60 :
+                     valor * 3600;
+
+    equivalenteSeg.textContent  = `🕓 ${segundos.toFixed(2)} seg`;
+    equivalenteMin.textContent  = `⏱ ${(segundos / 60).toFixed(4)} min`;
+    equivalenteHora.textContent = `⌛ ${(segundos / 3600).toFixed(4)} h`;
+  }
+
+  valorInput.addEventListener("input", actualizarResultado);
+  unidadSelect.addEventListener("change", actualizarResultado);
+
+  // Manejo de reset dentro del convertidor
+  const convertidorBox = document.getElementById("convertidor-tiempo");
+  const resetBtn = convertidorBox.querySelector("button[type='reset']");
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      valorInput.value = "";
+      equivalenteSeg.textContent  = "🕓 — seg";
+      equivalenteMin.textContent  = "⏱ — min";
+      equivalenteHora.textContent = "⌛ — h";
+    });
+  }
+});

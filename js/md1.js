@@ -11,18 +11,12 @@ function validarCamposMD1(form) {
 
   let valido = true;
 
-  if (!lambda) {
-    form.querySelector("#error-lambda").textContent = "Ingrese la tasa de llegada (λ).";
-    valido = false;
-  } else if (parseFloat(lambda) <= 0) {
+  if (!lambda || parseFloat(lambda) <= 0) {
     form.querySelector("#error-lambda").textContent = "λ debe ser mayor que 0.";
     valido = false;
   }
 
-  if (!es) {
-    form.querySelector("#error-es").textContent = "Ingrese el tiempo de servicio E(s).";
-    valido = false;
-  } else if (parseFloat(es) <= 0) {
+  if (!es || parseFloat(es) <= 0) {
     form.querySelector("#error-es").textContent = "E(s) debe ser mayor que 0.";
     valido = false;
   }
@@ -32,17 +26,16 @@ function validarCamposMD1(form) {
     valido = false;
   }
 
-  // Convertir E(s) a horas
   let esEnHoras = parseFloat(es);
   if (unidad === "segundos") esEnHoras /= 3600;
-  if (unidad === "minutos") esEnHoras /= 60;
+  else if (unidad === "minutos") esEnHoras /= 60;
 
   const lambdaNum = parseFloat(lambda);
   const mu = 1 / esEnHoras;
   const rho = lambdaNum / mu;
 
   if (rho >= 1) {
-    form.querySelector("#error-lambda").textContent = "El sistema no es estable: ρ ≥ 1.";
+    form.querySelector("#error-lambda").textContent = "El sistema no es estable (ρ ≥ 1).";
     valido = false;
   }
 
@@ -55,23 +48,22 @@ function validarCamposMD1(form) {
   };
 }
 
+
 function calcularMD1(lambda, es, mu, rho) {
-  const Lq = Math.pow(rho, 2) / (2 * (1 - rho));
-  const L = Lq + rho;
-  const Wq = Lq / lambda;
-  const W = Wq + es;
+  const Lq = Math.pow(rho, 2) / (2 * (1 - rho));          // clientes promedio en cola
+  const En = Lq + rho;                                    // E(n): promedio en el sistema
+  const wq = Lq / lambda;                                 // tiempo promedio en cola
+  const Et = wq + es;                                     // E(T): tiempo promedio en sistema
 
   return {
     mu,
     rho,
-    L,
+    En,
+    Et,
     Lq,
-    W,
-    Wq,
-    es
+    wq
   };
 }
-
 
 function mostrarResultadosMD1(resultados) {
   const seccionResultados = document.getElementById("resultados");
@@ -81,10 +73,10 @@ function mostrarResultadosMD1(resultados) {
   const tarjetas = [
     { simbolo: "🔧 μ", valor: resultados.mu.toFixed(4), desc: "Tasa de servicio", formula: "μ = 1 / E(s)" },
     { simbolo: "🔄 ρ", valor: resultados.rho.toFixed(4), desc: "Tasa de utilización", formula: "ρ = λ / μ" },
-    { simbolo: "🧍‍♂️ E(n)", valor: resultados.L.toFixed(4), desc: "Clientes promedio en el sistema", formula: "E(n) = Lq + ρ" },
-    { simbolo: "⏱ E(T)", valor: resultados.W.toFixed(4) + " h", desc: "Tiempo promedio en el sistema", formula: "E(T) = Wq + E(s)" },
-    { simbolo: "📥 En cola", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en cola", formula: "Lq = ρ² / [2(1 - ρ)]" },
-    { simbolo: "⌛ wq", valor: resultados.Wq.toFixed(4) + " h", desc: "Tiempo promedio en cola", formula: "wq = Lq / λ" }
+    { simbolo: "🧍‍♂️ E(n)", valor: resultados.En.toFixed(4), desc: "Clientes promedio en el sistema", formula: "E(n) = Lq + ρ" },
+    { simbolo: "⏱ E(T)", valor: resultados.Et.toFixed(4) + " h", desc: "Tiempo promedio en el sistema", formula: "E(T) = wq + E(s)" },
+    { simbolo: "📥 Lq", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en cola", formula: "Lq = ρ² / [2(1 - ρ)]" },
+    { simbolo: "⌛ wq", valor: resultados.wq.toFixed(4) + " h", desc: "Tiempo promedio en cola", formula: "wq = Lq / λ" }
   ];
 
   tarjetas.forEach(t => {

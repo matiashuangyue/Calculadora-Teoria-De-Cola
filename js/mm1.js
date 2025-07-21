@@ -13,35 +13,53 @@ function calcularMM1(lambda, mu) {
 
 
 function mostrarResultadosMM1(resultados) {
-    const seccionResultados = document.getElementById("resultados");
-    const contenedor = document.getElementById("resultados-container");
+  const seccionResultados = document.getElementById("resultados");
+  const contenedor = document.getElementById("resultados-container");
+  contenedor.innerHTML = "";
 
-    contenedor.innerHTML = ""; // limpiar
-
-    const tarjetas = [
-        { simbolo: "📦 P₀", valor: resultados.P0.toFixed(4), desc: "Probabilidad de que el sistema esté vacío", formula: "P₀ = 1 - ρ" },
-        { simbolo: "🔄 ρ", valor: resultados.rho.toFixed(4), desc: "Tasa de utilización del sistema", formula: "ρ = λ / μ" },
-        { simbolo: "🧍‍♂️ L", valor: resultados.L.toFixed(4), desc: "Clientes promedio en el sistema", formula: "L = λ / (μ - λ)" },
-        { simbolo: "📥 Lq", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en la cola", formula: "Lq = λ² / (μ(μ - λ))" },
-        { simbolo: "⏱ W", valor: resultados.W.toFixed(4) + " min", desc: "Tiempo promedio en el sistema", formula: "W = 1 / (μ - λ)" },
-        { simbolo: "⌛ Wq", valor: resultados.Wq.toFixed(4) + " min", desc: "Tiempo promedio en la cola", formula: "Wq = λ / (μ(μ - λ))" },
-    ];
-
-    tarjetas.forEach(t => {
-        const card = document.createElement("div");
-        card.className = "resultado-card";
-        card.innerHTML = `
-            <div class="simbolo"><strong>${t.simbolo}</strong></div>
-            <div class="valor">${t.valor}</div>
-            <div class="descripcion">${t.desc}</div>
-            <div class="tooltip">${t.formula}</div>
-        `;
-        contenedor.appendChild(card);
-    });
+  // Verificamos estabilidad
+  if (resultados.rho >= 1) {
+    const cardError = document.createElement("div");
+    cardError.className = "resultado-card error-card";
+    cardError.innerHTML = `
+      <div class="simbolo"><strong>❌</strong></div>
+      <div class="valor">ρ = ${resultados.rho.toFixed(4)}</div>
+      <div class="descripcion">El sistema es inestable</div>
+      <div class="tooltip">ρ ≥ 1 significa que la tasa de llegada supera la capacidad de servicio.</div>
+    `;
+    contenedor.appendChild(cardError);
 
     seccionResultados.style.display = "block";
     seccionResultados.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  // Resultados normales
+  const tarjetas = [
+    { simbolo: "📦 P₀", valor: resultados.P0.toFixed(4), desc: "Probabilidad de que el sistema esté vacío", formula: "P₀ = 1 - ρ" },
+    { simbolo: "🔄 ρ", valor: resultados.rho.toFixed(4), desc: "Tasa de utilización del sistema", formula: "ρ = λ / μ" },
+    { simbolo: "🧍‍♂️ L", valor: resultados.L.toFixed(4), desc: "Clientes promedio en el sistema", formula: "L = λ / (μ - λ)" },
+    { simbolo: "📥 Lq", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en la cola", formula: "Lq = λ² / (μ(μ - λ))" },
+    { simbolo: "⏱ W", valor: resultados.W.toFixed(4) + " min", desc: "Tiempo promedio en el sistema", formula: "W = 1 / (μ - λ)" },
+    { simbolo: "⌛ Wq", valor: resultados.Wq.toFixed(4) + " min", desc: "Tiempo promedio en la cola", formula: "Wq = λ / (μ(μ - λ))" }
+  ];
+
+  tarjetas.forEach(t => {
+    const card = document.createElement("div");
+    card.className = "resultado-card";
+    card.innerHTML = `
+      <div class="simbolo"><strong>${t.simbolo}</strong></div>
+      <div class="valor">${t.valor}</div>
+      <div class="descripcion">${t.desc}</div>
+      <div class="tooltip">${t.formula}</div>
+    `;
+    contenedor.appendChild(card);
+  });
+
+  seccionResultados.style.display = "block";
+  seccionResultados.scrollIntoView({ behavior: "smooth" });
 }
+
 
 
 function validarCamposMM1(form) {
