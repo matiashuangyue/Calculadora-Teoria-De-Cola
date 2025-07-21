@@ -64,7 +64,7 @@ tarjetas.forEach(tarjeta => {
         // Delegar validación del formulario clonado en el contenedor
 const contenedorCalculo = document.getElementById("formulario-calculo");// Asegúrate de que este contenedor exista
 
-// Evento de submit en el formulario mm1
+// Evento de submit en el formulario
 contenedorCalculo.addEventListener("submit", function (event) {
     const form = event.target;
     if (form.id !== "form-activo") return;
@@ -149,7 +149,7 @@ contenedorCalculo.addEventListener("submit", function (event) {
 });
 
 
-// Evento de reset en el formulario mm1
+// Evento de reset en el formulario 
 contenedorCalculo.addEventListener("reset", function (event) {
     const form = event.target;
     if (form.id === "form-activo") {
@@ -157,22 +157,8 @@ contenedorCalculo.addEventListener("reset", function (event) {
         limpiarErrores(form);
          // Ocultar sección de resultados
         OcultarResultados();
-    }
-});
-
-// Evento de submit en el formulario mm2
-contenedorCalculo.addEventListener("submit", function (event) {
-    const form = event.target;
-
-    if (form.id === "form-activo" && form.classList.contains("mm2")) {
-        event.preventDefault();
-
-        const { valido, lambda, mu1, mu2, seleccion} = validarCamposMM2(form);
-
-        if (!valido) return;
-
-        const resultados = calcularMM2(lambda, mu1, mu2,);
-        mostrarResultadosMM2(resultados);
+        // Limpiar el contenedor del formulario
+        document.getElementById("formulario-calculo").innerHTML = "";
     }
 });
 
