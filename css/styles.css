@@ -134,6 +134,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;/* para el tooltip */
+  overflow: hidden;/* para evitar que el tooltip se salga */
 }
 
 .tarjeta:hover {
@@ -157,7 +159,30 @@ body {
   font-size: 0.9rem;
   color: #666;
 }
+/* Panel flotante que aparece desde la derecha */
+.hover-info {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 85, 255, 0.95); /* azul sólido con transparencia */
+  color: white;
+  padding: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border-radius: 15px;
+  transition: right 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+}
 
+.tarjeta:hover .hover-info {
+  right: 0;
+}
 /* =======================
    Sección cálculo y resultados
    ======================= */

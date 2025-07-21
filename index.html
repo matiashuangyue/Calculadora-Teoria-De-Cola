@@ -42,36 +42,56 @@
         <img src="assets/mm1.png" alt="M/M/1"/>
         <h3>M/M/1</h3>
         <p class="descripcion">Un solo servidor, llegadas y servicios exponenciales</p>
+         <!-- Información al pasar el mouse -->
+        <div class="hover-info">
+          <p><strong>M/M/1</strong><br> Modelo con un solo servidor, donde llegadas y servicios son procesos de Poisson.</p>
+        </div>
+
       </div>
 
       <div class="tarjeta modelo-card" data-modelo="mm2">
         <img src="assets/mm2.png" alt="M/M/2"/>
         <h3>M/M/2</h3>
         <p class="descripcion">Dos servidores, llegadas y servicios exponenciales</p>
+        <div class="hover-info">
+          <p><strong>M/M/2</strong><br> Extensión del modelo M/M/1 con dos servidores atendiendo a los clientes en paralelo. Las llegadas continúan siendo exponenciales, y los tiempos de servicio también. Es útil para analizar sistemas que duplican capacidad de atención sin modificar la estructura de la cola (una sola fila).</p>
+        </div>
       </div>
 
       <div class="tarjeta modelo-card" data-modelo="mm1n">
         <img src="assets/mm1n.png" alt="M/M/1/N"/>
         <h3>M/M/1/N</h3>
         <p class="descripcion">Capacidad limitada (máximo N clientes)</p>
+        <div class="hover-info">
+          <p><strong>M/M/1/N</strong><br> Variante del M/M/1 con capacidad limitada. El sistema puede aceptar hasta N clientes (incluyendo los atendidos y los que esperan). Si llega un cliente y el sistema está lleno, se rechaza. Este modelo permite estudiar saturación, pérdida de clientes y rendimiento efectivo en entornos con espacio físico o capacidad limitada.</p>
+        </div>
       </div>
 
       <div class="tarjeta modelo-card" data-modelo="prioridades">
         <img src="assets/prioridades.png" alt="Prioridades"/>
         <h3>Prioridades</h3>
         <p class="descripcion">Clientes con diferentes niveles de prioridad</p>
+        <div class="hover-info">
+          <p><strong>Prioridades</strong><br> Modelo de colas que integra distintos tipos de clientes con niveles de prioridad. Los de mayor prioridad acceden antes al servicio, modificando el orden de atención. Se pueden calcular los tiempos de espera de cada clase según su nivel, evaluando el impacto de reglas preferenciales en el sistema.</p>
+        </div>
       </div>
 
       <div class="tarjeta modelo-card" data-modelo="md1">
         <img src="assets/md1.png" alt="M/D/1"/>
         <h3>M/D/1</h3>
         <p class="descripcion">Servicio con tiempo fijo</p>
+        <div class="hover-info">
+          <p><strong>M/D/1</strong><br> Sistema de cola con un servidor y tiempos de servicio constantes (determinísticos). Las llegadas siguen una distribución exponencial. Este modelo es útil en procesos donde cada atención tiene duración fija, como máquinas que tardan lo mismo en completar un ciclo.</p>
+        </div>
       </div>
 
       <div class="tarjeta modelo-card" data-modelo="mg1">
         <img src="assets/mg1.png" alt="M/G/1"/>
         <h3>M/G/1</h3>
         <p class="descripcion">Tiempo de servicio general (media y varianza)</p>
+        <div class="hover-info">
+          <p><strong>M/G/1</strong><br> Modelo generalizado con un servidor, llegadas exponenciales y tiempos de servicio arbitrarios con media y varianza conocidas. Permite evaluar sistemas complejos donde la duración del servicio no responde a una sola distribución. Se aplica en entornos con alta variabilidad o tiempos impredecibles.</p>
+        </div>
       </div>
     </div>
   </section>
