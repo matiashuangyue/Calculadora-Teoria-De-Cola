@@ -1,4 +1,4 @@
-# 🎓 Calculadora de Modelos de Colas
+# 🎓 Calculadora de Modelos de Colas---YUE HUANG
 
 🚀 Simulador interactivo para analizar sistemas de colas mediante modelos clásicos de teoría. Ideal para estudiantes, docentes y entusiastas del rendimiento de sistemas.
 
@@ -66,7 +66,7 @@
 
 ## 👤 Autor
 
-Desarrollado con precisión por **Yue**  
+Desarrollado con precisión por **Yue Huang**  
 💡 Enfocado en aplicabilidad académica y diseño funcional  
 📦 Publicado vía [GitHub Pages](https://matiashuangyue.github.io/Calculadora-Teoria-De-Cola/)
 
