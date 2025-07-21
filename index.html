@@ -90,35 +90,41 @@
   <div id="form-mm1" class="formulario-modelo">
     <h3>Modelo M/M/1</h3>
         <form id="mm1-form">
-            <label for="lambda">Tasa de llegada (λ):</label>
-            <input type="number" step="any" id="lambda" name="lambda" />
-            <span class="error-message" id="error-lambda"></span>
+          <div class="grupo-inputs">
+            <label for="lambda">Tasa de llegada (λ):
+              <input type="number" step="any" id="lambda" name="lambda" />
+              <span class="error-message" id="error-lambda"></span>
+            </label>
 
-            <label for="mu">Tasa de servicio (μ):</label>
-            <input type="number" step="any" id="mu" name="mu" />
-            <span class="error-message" id="error-mu"></span>
+            <label for="mu">Tasa de servicio (μ):
+              <input type="number" step="any" id="mu" name="mu" />
+              <span class="error-message" id="error-mu"></span>
+            </label>
 
-            <label for="tipoCalculo">Tipo de cálculo:</label>
-            <select id="tipoCalculo" name="tipoCalculo">
-            <option value="">Seleccione una opción</option> 
-            <option value="exactamente">Exactamente</option>
-            <option value="almenos">Al menos</option>
-            <option value="alosumo">A lo sumo</option>
-            </select>
-            <span class="error-message" id="error-tipoCalculo"></span>
+            <label for="tipoCalculo">Tipo de cálculo:
+              <select id="tipoCalculo" name="tipoCalculo">
+                <option value="exactamente" selected>Exactamente</option>
+                <option value="almenos">Al menos</option>
+                <option value="alosumo">A lo sumo</option>
+              </select>
+              <span class="error-message" id="error-tipoCalculo"></span>
+            </label>
 
-            <label for="contexto">Contexto:</label>
-            <select id="contexto" name="contexto">
-            <option value="">Seleccione una opción</option>
-            <option value="sistema">En sistema</option>
-            <option value="cola">En cola</option>
-            </select>
-            <span class="error-message" id="error-contexto"></span>
-            <div class="botones">
-                <button type="submit">Calcular</button>
-                <button type="reset">Limpiar</button>
-            </div>
+            <label for="contexto">Contexto:
+              <select id="contexto" name="contexto">
+                <option value="sistema" selected>En sistema</option>
+                <option value="cola">En cola</option>
+              </select>
+              <span class="error-message" id="error-contexto"></span>
+            </label>
+          </div>
+
+          <div class="botones">
+            <button type="submit">Calcular</button>
+            <button type="reset">Limpiar</button>
+          </div>
         </form>
+
   </div>
 
 
@@ -126,27 +132,30 @@
 
      <h3>Modelo M/M/2</h3>
         <form id="mm2-form">
-            <label for="lambda">Tasa de llegada (λ):</label>
+        <div class="grupo-inputs">
+          <label for="lambda">Tasa de llegada (λ):
             <input type="number" step="any" id="lambda" name="lambda" />
             <span class="error-message" id="error-lambda"></span>
+          </label>
 
-            <label for="mu1">Tasa de servicio 1 (μ1):</label>
+          <label for="mu1">Tasa de servicio 1 (μ1):
             <input type="number" step="any" id="mu1" name="mu1" />
             <span class="error-message" id="error-mu1"></span>
+          </label>
 
-
-            <label for="mu2">Tasa de servicio 2 (μ2):</label>
+          <label for="mu2">Tasa de servicio 2 (μ2):
             <input type="number" step="any" id="mu2" name="mu2" />
             <span class="error-message" id="error-mu2"></span>
+          </label>
 
-            <label for="modoseleccion">Modo de Seleccion:</label>
+          <label for="modoseleccion">Modo de Seleccion:
             <select id="modoseleccion" name="modoseleccion">
-            <option value="">Seleccione una opción</option>
             <option value="conseleccion">Con Seleccion</option>
-            <option value="sinseleccion">Sin Seleccion</option>
+            <option value="sinseleccion" selected>Sin Seleccion</option>
             </select>
             <span class="error-message" id="error-modoseleccion"></span>
-
+          </label>
+        </div>
             <div class="botones">
                 <button type="submit">Calcular</button>
                 <button type="reset">Limpiar</button>
@@ -154,7 +163,59 @@
         </form>
 
   </div>
-  <div id="form-mm1n" class="formulario-modelo"></div>
+
+  <div id="form-mm1n" class="formulario-modelo">
+    <h3>Modelo M/M/1/N</h3>
+        <form id="mm1n-form">
+        <div class="grupo-inputs">
+          <label for="lambda">Tasa de llegada (λ):
+            <input type="number" step="any" id="lambda" name="lambda" />
+            <span class="error-message" id="error-lambda"></span>
+          </label>
+
+          <label for="mu">Tasa de servicio (μ):
+            <input type="number" step="any" id="mu" name="mu" />
+            <span class="error-message" id="error-mu"></span>
+          </label>
+
+          <label for="n">Capacidad máxima (N):
+            <input type="number" step="any" id="n" name="n" />
+            <span class="error-message" id="error-n"></span>
+          </label>
+        </div>
+
+         <h3>Calcular Probabilidad</h3>
+        
+          <div class="grupo-inputs">
+          <label for ='numero de clientes'>Número de clientes:
+            <input type="number" step="any" id="numeroClientes" name="numeroClientes" />
+            <span class="error-message" id="error-numeroClientes"></span>
+          </label>
+
+          <label for="tipoCalculo">Tipo de cálculo:
+            <select id="tipoCalculo" name="tipoCalculo">
+            <option value="exactamente" selected>Exactamente</option>
+            <option value="almenos">Al menos</option>
+            <option value="alosumo">A lo sumo</option>
+            </select>
+            <span class="error-message" id="error-tipoCalculo"></span>
+          </label>
+            
+          <label for="contexto">Contexto:
+            <select id="contexto" name="contexto">
+            <option value="sistema" selected>En sistema</option>
+            <option value="cola">En cola</option>
+            </select>
+            <span class="error-message" id="error-contexto"></span>
+          </label>
+
+        </div>
+            <div class="botones">
+                <button type="submit">Calcular</button>
+                <button type="reset">Limpiar</button>
+            </div>
+        </form>
+  </div>
   <div id="form-prioridades" class="formulario-modelo"></div>
   <div id="form-md1" class="formulario-modelo"></div>
   <div id="form-mg1" class="formulario-modelo"></div>
