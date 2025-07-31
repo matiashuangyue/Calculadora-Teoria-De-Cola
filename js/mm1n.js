@@ -2,11 +2,12 @@ function calcularMM1N(lambda, mu, N, numeroClientes, tipoCalculo, contexto) {
   const rho = lambda / mu;
   const p0 = rho === 1 ? 1 / (N + 1) : (1 - rho) / (1 - Math.pow(rho, N + 1));
 
+  // Función para calcular P(n)
   function Pn(n) {
     if (n > N) return 0;
     return p0 * Math.pow(rho, n);
   }
-
+// calcular probabilidad
   let probabilidad;
   if (tipoCalculo === "exactamente") {
     probabilidad = Pn(numeroClientes);
@@ -21,14 +22,14 @@ function calcularMM1N(lambda, mu, N, numeroClientes, tipoCalculo, contexto) {
       probabilidad += Pn(i);
     }
   }
-
+// calcular Ls y Lq
   let Ls = 0;
   let Lq = 0;
   for (let n = 1; n <= N; n++) {
     Ls += n * Pn(n);
     if (n >= 2) Lq += (n - 1) * Pn(n);
   }
-
+// calcular Pb, tasaEfectiva, Ws y Wq
   const Pb = Pn(N);
   const tasaEfectiva = lambda * (1 - Pb);
   const Ws = Ls / tasaEfectiva;
@@ -68,8 +69,8 @@ function mostrarResultadosMM1N(resultados) {
     { simbolo: "🚫 Pᴮ", valor: resultados.Pb.toFixed(4), desc: "Probabilidad de rechazo (sistema lleno)", formula: "Pᴮ = P(N)" },
     { simbolo: "📈 L", valor: resultados.Ls.toFixed(4), desc: "Clientes promedio en el sistema", formula: "Σ n·P(n)" },
     { simbolo: "📥 Lq", valor: resultados.Lq.toFixed(4), desc: "Clientes promedio en la cola", formula: "Σ (n-1)·P(n)" },
-    { simbolo: "⏱ W", valor: resultados.Ws.toFixed(4) + " min", desc: "Tiempo promedio en el sistema", formula: "W = L / tasa efectiva" },
-    { simbolo: "⌛ Wq", valor: resultados.Wq.toFixed(4) + " min", desc: "Tiempo promedio en la cola", formula: "Wq = Lq / tasa efectiva" },
+    { simbolo: "⏱ W", valor: resultados.Ws.toFixed(4) + " hora", desc: "Tiempo promedio en el sistema", formula: "W = L / tasa efectiva" },
+    { simbolo: "⌛ Wq", valor: resultados.Wq.toFixed(4) + " hora", desc: "Tiempo promedio en la cola", formula: "Wq = Lq / tasa efectiva" },
     { simbolo: "📤 λₑ", valor: resultados.tasaEfectiva.toFixed(4), desc: "Tasa de llegada efectiva", formula: "λ(1 - Pᴮ)" },
     { simbolo: "❌ Rechazo", valor: resultados.tasaRechazo.toFixed(4), desc: "Tasa de rechazo", formula: "λ · Pᴮ" }
   ];
