@@ -240,22 +240,34 @@ document.addEventListener("DOMContentLoaded", () => {
   function actualizarResultado() {
     const valor = parseFloat(valorInput.value);
     const unidad = unidadSelect.value;
-
+  
     if (isNaN(valor) || valor <= 0) {
       equivalenteSeg.textContent  = "🕓 — seg";
       equivalenteMin.textContent  = "⏱ — min";
       equivalenteHora.textContent = "⌛ — h";
+      tasaMin.textContent = "— clientes/min";
+      tasaHora.textContent = "— clientes/hora";
+      tasaSeg.textContent = "— clientes/seg";
       return;
     }
-
+  
+    // Convertimos duración a segundos
     const segundos = unidad === "segundos" ? valor :
                      unidad === "minutos" ? valor * 60 :
                      valor * 3600;
-
+  
+    // Equivalencias de tiempo
     equivalenteSeg.textContent  = `🕓 ${segundos.toFixed(2)} seg`;
     equivalenteMin.textContent  = `⏱ ${(segundos / 60).toFixed(4)} min`;
     equivalenteHora.textContent = `⌛ ${(segundos / 3600).toFixed(4)} h`;
+  
+    // Tasas
+    const tasaPorSeg = 1 / segundos;
+    tasaSeg.textContent  = `📎 ${tasaPorSeg.toFixed(6)} clientes/seg`;
+    tasaMin.textContent  = `📎 ${(tasaPorSeg * 60).toFixed(4)} clientes/min`;
+    tasaHora.textContent = `📎 ${(tasaPorSeg * 3600).toFixed(2)} clientes/hora`;
   }
+  
 
   valorInput.addEventListener("input", actualizarResultado);
   unidadSelect.addEventListener("change", actualizarResultado);
@@ -270,6 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
       equivalenteSeg.textContent  = "🕓 — seg";
       equivalenteMin.textContent  = "⏱ — min";
       equivalenteHora.textContent = "⌛ — h";
+      tasaMin.textContent = "— clientes/min";
+      tasaHora.textContent = "— clientes/hora";
+      tasaSeg.textContent = "— clientes/seg";
     });
   }
 });

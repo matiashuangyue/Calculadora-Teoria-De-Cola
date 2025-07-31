@@ -470,10 +470,11 @@
 </section>
 
 <!-- 🔹 Sección de convertidor tiempo -->
- <div id="convertidor-tiempo" class="convertidor-flotante">
+<div id="convertidor-tiempo" class="convertidor-flotante">
   <h3>🕒 Convertidor de Tiempo</h3>
-  <label for="valorTiempo">Valor:
-    <input type="number" step="any" id="valorTiempo" placeholder="Ej: 1.5" />
+
+  <label for="valorTiempo">Duración de servicio (por cliente):
+    <input type="number" step="any" id="valorTiempo" placeholder="Ej: 4" />
   </label>
 
   <label for="unidadOrigen">Unidad:
@@ -484,12 +485,17 @@
     </select>
   </label>
 
-  <div id="resultadoConvertido" class="columna-equivalencias">
-  <span id="equivalenteSeg">🕓 — seg</span><br>
-  <span id="equivalenteMin">⏱ — min</span><br>
-  <span id="equivalenteHora">⌛ — h</span>
-</div>
+  <div class="columna-equivalencias">
+    <span id="equivalenteSeg">🕓 — seg</span>
+    <span id="equivalenteMin">⏱ — min</span>
+    <span id="equivalenteHora">⌛ — h</span>
+  </div>
 
+  <div id="tasaConvertida" class="columna-tasas">
+    <span id="tasaMin">— clientes/min</span>
+    <span id="tasaHora">— clientes/hora</span>
+    <span id="tasaSeg">— clientes/seg</span>
+  </div>
 
   <button type="reset">Limpiar</button>
 </div>
